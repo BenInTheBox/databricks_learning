@@ -9,7 +9,7 @@ import os
 
 # COMMAND ----------
 
-pd.read_excel("Loyalty.xls")
+pd.read_excel("data/Loyalty.xls")
 
 # COMMAND ----------
 
