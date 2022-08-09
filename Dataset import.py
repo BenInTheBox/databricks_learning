@@ -21,7 +21,7 @@ import pyspark.pandas as pspd
 
 # COMMAND ----------
 
-row_data: pd.DataFrame = pd.read_excel('Loyalty.xls')
+row_data: pd.DataFrame = pd.read_excel('data/Loyalty.xls')
 row_data: pspd.DataFrame = pspd.DataFrame(row_data)
 
 # COMMAND ----------
