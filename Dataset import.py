@@ -5,13 +5,14 @@
 # COMMAND ----------
 
 !pip install xlrd
-!pip install dbutils
 
 # COMMAND ----------
 
 import urllib
+import numpy as np
 import pandas as pd
-import dbutils
+import pyspark
+import pyspark.pandas as pspd
 
 # COMMAND ----------
 
@@ -20,19 +21,40 @@ import dbutils
 
 # COMMAND ----------
 
-row_data = pd.read_excel('Loyalty.xls')
-
+row_data: pd.DataFrame = pd.read_excel('Loyalty.xls')
+row_data: pspd.DataFrame = pspd.DataFrame(row_data)
 
 # COMMAND ----------
 
-display(row_data)
-display(row_data.describe())
-#dbutils.data.summarize(row_data)
+dbutils.data.summarize(row_data)
 
 # COMMAND ----------
 
 # MAGIC %md
 # MAGIC # Write in delta table
+
+# COMMAND ----------
+
+row_data: pyspark.sql.dataframe.DataFrame = row_data.to_spark()
+#row_data: pyspark.sql.dataframe.DataFrame = spark.createDataFrame(row_data) 
+
+
+# COMMAND ----------
+
+wprking_dir = "UNKNOWN"
+
+# COMMAND ----------
+
+row_data.write.format("delta").mode("overwrite").save(working_dir)
+
+# COMMAND ----------
+
+import os
+os.getcwd()
+
+# COMMAND ----------
+
+dbutils.fs.help()
 
 # COMMAND ----------
 
